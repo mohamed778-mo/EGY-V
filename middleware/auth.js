@@ -23,7 +23,7 @@ const auth = async (req, res, next) => {
 
     const user = await User.findById(decoded.id);
     if (!user || !user.tokens.includes(token)) {
-      return res.status(401).send("Please login!");
+      return res.status(403).send("Please login!");
     }
 
     req.user = user;
