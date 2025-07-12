@@ -207,8 +207,20 @@ exports.login_user = async (req, res) => {
     });
     user.tokens.push(token);
     await user.save();
+    
     const message = 'Login successful!';
-    res.status(200).send({ success: message });
+    
+   const userData = {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+    };
+
+    return res.status(200).send({
+      success: 'Login successful!',
+      user: userData,
+    });
+    
   } catch (error) {
     res.status(500).send(error.message);
   }
