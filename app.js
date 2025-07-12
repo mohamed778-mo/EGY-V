@@ -93,24 +93,7 @@ app.use((err, req, res, next) => {
 });
 
 
-
-
-const server = http.createServer(app);
-
-const io = new Server(server, {
-  cors: {
-    origin: '*',  
-    methods: ['GET', 'POST'],
-  },
-  transports: ['websocket'], 
-});
-
-app.set('io', io);
-
-
-
-
-const port = 3000;
+const port = 5000;
 
 server.listen(port , () => {
     console.log(`Server is running on port ${port}`);
