@@ -1,8 +1,8 @@
 const mongoose =require("mongoose")
 require("dotenv").config()
-// const URL =process.env.MONGODB_URL
+const URL ='mongodb+srv://muhammadelmalla13:vqwTQAACDU6v0FGO@cluster0.njnkmyd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
 const connection = ()=>{
-   mongoose.connect('mongodb+srv://muhammadelmalla13:vqwTQAACDU6v0FGO@cluster0.njnkmyd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+   mongoose.connect(URL)
       .then(()=>{console.log('done connection !!')})
   .catch((error)=>{console.log(error.message)})
 }
