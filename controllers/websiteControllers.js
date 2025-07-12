@@ -200,7 +200,7 @@ exports.login_user = async (req, res) => {
     }
     const SECRETKEY = process.env.SECRETKEY;
     const token = jwt.sign({ id: user._id, type: user.role }, SECRETKEY,{ expiresIn: '7d' }) ;
-    res.cookie("access_token", `Bearer ${token}`, {
+    res.cookie("access_token", token, {
       maxAge: 7 * 24 * 60 * 60 * 1000, 
       secure: false,      
       sameSite: 'Lax',  
