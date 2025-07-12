@@ -5,41 +5,36 @@ require('dotenv').config()
 
 const auth = async (req, res, next) => {
   try {
-  
-   const token = req?.cookies?.access_token;
-const tokenHeader = req?.headers?.authorization?.split(" ")[1];
+    const cookieToken = req?.cookies?.access_token;
+    const headerAuth = req?.headers?.authorization;
 
-    if (!token && !tokenHeader) {
+    const headerToken = headerAuth?.startsWith("Bearer ")
+      ? headerAuth.split(" ")[1]
+      : null;
+
+    const token = cookieToken || headerToken;
+
+    if (!token) {
       return res.status(401).send("Please login!");
     }
 
     const SECRETKEY = process.env.SECRETKEY;
-    let decoded;
-    let user;
-    let accessToken;
+    const decoded = jwt.verify(token, SECRETKEY);
 
-    if (token) {
-      decoded = jwt.verify(token, SECRETKEY);
-      accessToken = token;
-    } else if (tokenHeader) {
-      decoded = jwt.verify(tokenHeader, SECRETKEY);
-      accessToken = tokenHeader;
-    }
-
-    
-    user = await User.findById(decoded.id);
-    if (!user || !user.tokens.includes(accessToken)) {
+    const user = await User.findById(decoded.id);
+    if (!user || !user.tokens.includes(token)) {
       return res.status(401).send("Please login!");
     }
 
     req.user = user;
-    req.token = accessToken;
+    req.token = token;
     next();
   } catch (e) {
     console.error(e);
     res.status(500).send("Authentication failed: " + e.message);
   }
 };
+
 
 
 const adminAuth = async (req, res, next) => {
