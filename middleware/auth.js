@@ -6,8 +6,8 @@ require('dotenv').config()
 const auth = async (req, res, next) => {
   try {
   
-    const token = req?.cookies?.access_token?.split(" ")[1];
-    const tokenHeader = req?.headers?.authorization?.split(" ")[1];
+   const token = req?.cookies?.access_token;
+const tokenHeader = req?.headers?.authorization?.split(" ")[1];
 
     if (!token && !tokenHeader) {
       return res.status(401).send("Please login!");
