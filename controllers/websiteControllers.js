@@ -258,11 +258,17 @@ exports.filterTrips = async (req, res) => {
 exports.getAllTrips = async (req, res) => {
   try {
     const trips = await Trip.find().select('-about_this_experience -highlights -whatis_included -available_date -time -available_seats');
+
+    if (trips.length === 0) {
+      return res.status(200).json({ message: 'No trips available', trips: [] });
+    }
+
     res.status(200).json(trips);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
+
 
 exports.getTrip = async (req, res) => {
   try {
