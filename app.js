@@ -85,18 +85,18 @@ app.all('*', (req, res, next) => {
 });
 
 
-app.use((err, req, res, next) => {
-  res.status(400).json({
-    success: false,
-    message: err.message 
-  });
-});
+// app.use((err, req, res, next) => {
+//   res.status(400).json({
+//     success: false,
+//     message: err.message 
+//   });
+// });
 
 
-const port = 5000;
+// const port = 5000;
 
-app.listen(port , () => {
-    console.log(`Server is running on port ${port}`);
-});
+// app.listen(port , () => {
+//     console.log(`Server is running on port ${port}`);
+// });
 
 module.exports = app;
