@@ -250,7 +250,7 @@ exports.filterTrips = async (req, res) => {
       }
     });
 
-    res.status(200).json(trips);
+    res.status(200).json({trips});
   }catch(e){
     res.status(500).send({error:e.message})
   }
@@ -265,7 +265,7 @@ exports.getAllTrips = async (req, res) => {
       return res.status(200).json({ message: 'No trips available', trips: [] });
     }
 
-    res.status(200).json(trips);
+    res.status(200).json({trips});
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -276,7 +276,7 @@ exports.getTrip = async (req, res) => {
   try {
     const trip = await Trip.findById(req.params.id);
     if (!trip) return res.status(404).json({ message: 'Trip not found' });
-    res.status(200).json(trip);
+    res.status(200).json({trip});
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
