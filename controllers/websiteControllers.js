@@ -204,7 +204,7 @@ exports.login_user = async (req, res) => {
       maxAge: 7 * 24 * 60 * 60 * 1000, 
       secure: false,      
       sameSite: 'Lax',  
-      httpOnly: true,
+      httpOnly: false,
     });
     user.tokens.push(token);
     await user.save();
