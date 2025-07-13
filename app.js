@@ -36,11 +36,12 @@ app.use(helmet());
 // }));
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: ['http://localhost:3000', 'http://localhost:5173', 'http://127.0.0.1:3000', 'http://127.0.0.1:5173'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
+
 
 const LIMIT = '500kb';
 app.use(bodyParser.json({ limit: LIMIT, extended: true }));
