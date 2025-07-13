@@ -28,11 +28,16 @@ app.use(helmet());
 //     credentials: true 
 // }));
 
+// app.use(cors({
+//     origin: 'http://localhost:3000',
+//     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+//     allowedHeaders: ['Content-Type', 'Authorization'],
+//     credentials: true 
+// }));
+
 app.use(cors({
-    origin: 'http://localhost:3000',
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true 
+  origin: 'http://localhost:3000',
+  credentials: true
 }));
 
 const LIMIT = '500kb';
