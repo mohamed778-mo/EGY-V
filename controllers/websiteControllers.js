@@ -220,7 +220,7 @@ exports.login_user = async (req, res) => {
     return res.status(200).send({
       success: 'Login successful!',
       user: userData,
-      token:token
+   
     });
     
   } catch (error) {
