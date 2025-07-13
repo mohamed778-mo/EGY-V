@@ -209,7 +209,7 @@ exports.login_user = async (req, res) => {
     user.tokens.push(token);
     await user.save();
     
-    const message = 'Login successful!';
+    
     
    const userData = {
       id: user._id,
@@ -227,7 +227,6 @@ exports.login_user = async (req, res) => {
     res.status(500).send(error.message);
   }
 };
-
 
 exports.filterTrips = async (req, res) => {
   try {
