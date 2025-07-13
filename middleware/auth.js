@@ -5,14 +5,11 @@ require('dotenv').config()
 
 const auth = async (req, res, next) => {
   try {
-    const cookieToken = req?.cookies?.access_token;
-    const headerAuth = req?.headers?.authorization;
-
-    const headerToken = headerAuth?.startsWith("Bearer ")
-      ? headerAuth.split(" ")[1]
-      : null;
-
-    const token = cookieToken || headerToken;
+    const token = req.cookies?.access_token || (
+      req.headers.authorization?.startsWith("Bearer ")
+        ? req.headers.authorization.split(" ")[1]
+        : null
+    );
 
     if (!token) {
       return res.status(401).send("Please login!");
@@ -31,10 +28,9 @@ const auth = async (req, res, next) => {
     next();
   } catch (e) {
     console.error(e);
-    res.status(500).send("Authentication failed: " + e.message);
+    return res.status(401).send("Authentication failed: " + e.message);
   }
 };
-
 
 
 const adminAuth = async (req, res, next) => {
