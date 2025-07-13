@@ -17,5 +17,6 @@ router.get('/get_trip/:id',auth, websiteControllers.getTrip)
 
 router.post('/create-booking/:id',auth, websiteControllers.createBooking);
 
+router.post('/logout', websiteControllers.logout);
 
 module.exports = router;
