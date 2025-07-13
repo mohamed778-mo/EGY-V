@@ -308,3 +308,22 @@ exports.createBooking = async (req, res) => {
 };
 
 
+
+
+
+exports.logout = async (req, res) => {
+  try {
+    const token = req.cookies?.access_token;
+    if (token) {
+      const user = await User.findOne({ tokens: token });
+      if (user) {
+        user.tokens = user.tokens.filter(t => t !== token);
+        await user.save();
+      }
+    }
+    res.clearCookie("access_token");
+    res.status(200).json({ message: "Logged out successfully" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
